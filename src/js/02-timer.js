@@ -1,5 +1,6 @@
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
+import Notiflix from 'notiflix';
 
 startBtn = document.querySelector('button');
 pickedTime = document.querySelector('#datetime-picker');
@@ -13,9 +14,12 @@ flatpickr('#datetime-picker', {
   minuteIncrement: 1,
   onClose(selectedDates) {
     if (selectedDates[0] < new Date()) {
-      window.alert('Please choose a date in the future');
+      Notiflix.Notify.failure('Please choose a date in the future');
     } else {
       startBtn.disabled = false;
+      Notiflix.Notify.success(
+        'Correct date choosen, press start to begin countdown'
+      );
     }
   },
 });
@@ -51,5 +55,3 @@ startBtn.addEventListener('click', () => {
     }
   }, 1000);
 });
-
-
