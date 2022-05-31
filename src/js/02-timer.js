@@ -4,7 +4,7 @@ import Notiflix from 'notiflix';
 
 const startBtn = document.querySelector('[data-start]');
 const pickedTime = document.querySelector('#datetime-picker');
-
+let timerId = null;
 startBtn.disabled = true;
 
 flatpickr('#datetime-picker', {
@@ -18,7 +18,7 @@ flatpickr('#datetime-picker', {
     } else {
       startBtn.disabled = false;
       Notiflix.Notify.success(
-        'Correct date choosen, press start to begin countdown'
+        'Correct date has been selected, please press "start" to proceed'
       );
     }
   },
