@@ -1,3 +1,4 @@
+'use strict';
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 import Notiflix from 'notiflix';
@@ -7,7 +8,7 @@ const pickedTime = document.querySelector('#datetime-picker');
 let timerId = null;
 startBtn.disabled = true;
 
-flatpickr('#datetime-picker', {
+const options = {
   enableTime: true,
   time_24hr: true,
   defaultDate: new Date(),
@@ -22,9 +23,11 @@ flatpickr('#datetime-picker', {
       );
     }
   },
-});
+};
 
-startBtn.addEventListener('click', () => {
+flatpickr('#datetime-picker', options);
+
+const setTimer = () => {
   timerId = setInterval(() => {
     let countDownDate = new Date(pickedTime.value).getTime();
     let now = new Date().getTime();
@@ -54,4 +57,6 @@ startBtn.addEventListener('click', () => {
       document.querySelector('[data-seconds]').innerHTML = '00';
     }
   }, 1000);
-});
+};
+
+startBtn.addEventListener('click', setTimer);
